@@ -17,12 +17,10 @@ const CardItem = ({ item }) => {
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
   };
 
-  const specialStyles1 = {
-    border: "13px solid #d92626",
-  };const specialStyles2 = {
-    border: "13px solid #ffb300",
-  };const specialStyles3 = {
-    border: "13px solid #5dbf40",
+  const specialStyles = {
+    authors: { border: "13px solid #5dbf40" },
+    coatOfArms: { border: "13px solid #ffb300" },
+    gender: { border: "13px solid #d92626" },
   };
 
   const cardLinkStyles = {
@@ -48,21 +46,24 @@ const CardItem = ({ item }) => {
 
   let cardStyles = { ...baseCardStyles };
   if (item.authors) {
-    cardStyles = { ...baseCardStyles, ...specialStyles3 }; 
-  }if (item.coatOfArms) {
-    cardStyles = { ...baseCardStyles, ...specialStyles2 };
-  }if (item.gender) {
-    cardStyles = { ...baseCardStyles, ...specialStyles1 };
+    cardStyles = { ...cardStyles, ...specialStyles.authors };
+  } else if (item.coatOfArms) {
+    cardStyles = { ...cardStyles, ...specialStyles.coatOfArms };
+  } else if (item.gender) {
+    cardStyles = { ...cardStyles, ...specialStyles.gender };
   }
 
   return (
-    <Link to={`/details/${item.url}`} style={cardLinkStyles}>
+    <Link
+      to={`/details?url=${encodeURIComponent(item.url)}`}
+      style={cardLinkStyles}
+    >
       <div
         style={cardStyles}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <h2 style={cardTitleStyles}>{item.name || item.aliases.join(", ")}</h2>
+        <h2 style={cardTitleStyles}>{item.name || item.aliases?.join(", ")}</h2>
       </div>
     </Link>
   );
