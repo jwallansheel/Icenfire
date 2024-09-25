@@ -56,7 +56,9 @@ const CardItem = ({ item }) => {
 
   return (
     <Link
-      to={`/details?url=${encodeURIComponent(item.url)}`}
+      to={`/details?url=${encodeURIComponent(item.url
+        || item
+      )}`}
       style={cardLinkStyles}
     >
       <div
@@ -64,7 +66,7 @@ const CardItem = ({ item }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <h2 style={cardTitleStyles}>{item.name || item.aliases?.join(", ")}</h2>
+        <h2 style={cardTitleStyles}>{item?.name || item?.aliases?.join(", ")}</h2>
       </div>
     </Link>
   );
