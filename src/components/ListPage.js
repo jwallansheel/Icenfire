@@ -1,49 +1,63 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Listitem from "../components/listitem";
-
+import "./List.css"
 const ListPage = () => {
-      const [list, setList] = useState([]);
+  const [list, setList] = useState({ books: [], characters: [], houses: [] });
 
-      const fetchdata = async () => {
-        try {
-          let databooks = await fetch(
-            "https://anapioficeandfire.com/api/books"
-          );
-          let datachar = await fetch(
-            "https://anapioficeandfire.com/api/characters"
-          );
-          let datahouse = await fetch(
-            "https://anapioficeandfire.com/api/houses"
-          );
+  const fetchdata = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/getall`);
+      if (!response.ok) {
+        throw new Error("Data not found");
+      }
+      const data = await response.json();
+      console.log(data);
+      setList(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-          let books = await databooks.json();
-          let characters = await datachar.json();
-          let houses = await datahouse.json();
+  useEffect(() => {
+    fetchdata(); 
+  }, []);
 
-          let data = [...books, ...characters, ...houses];
-
-          setList(data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-
-      useEffect(() => {
-        fetchdata();
-      }, []);
   return (
     <div>
       <h1>List of Data:</h1>
-      <ul>
-        {list.map((item, index) => (
-          <Listitem key={index} item={item}>
-            <Link to={`/details/${item.id}`} >
-              {JSON.stringify(item.name || item.aliases)}
-            </Link>
-          </Listitem>
-        ))}
-      </ul>
+
+      <h2>Books:</h2>
+      <div className="scroll-container">
+        <ul className="horizontal-list">
+          {list?.books?.map((book, index) => (
+            <Listitem key={index} item={book}>
+              {book.name}
+            </Listitem>
+          ))}
+        </ul>
+      </div>
+
+      <h2>Characters:</h2>
+      <div className="scroll-container">
+        <ul className="horizontal-list">
+          {list?.characters?.map((character, index) => (
+            <Listitem key={index} item={character}>
+              {character.name || character.aliases[0]}
+            </Listitem>
+          ))}
+        </ul>
+      </div>
+
+      <h2>Houses:</h2>
+      <div className="scroll-container">
+        <ul className="horizontal-list">
+          {list?.houses?.map((house, index) => (
+            <Listitem key={index} item={house}>
+              {house.name || house.region}
+            </Listitem>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

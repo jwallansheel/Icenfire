@@ -1,0 +1,27 @@
+.scroll-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent line breaks and keep items in one row */
+  margin-bottom: 20px; /* Add some space between sections */
+}
+
+.horizontal-list {
+  display: flex; /* Align items in a row */
+  flex-direction: row; /* Ensure the items are arranged horizontally */
+  padding: 0; /* Remove default padding for the list */
+  margin: 0; /* Remove default margin for the list */
+  list-style-type: none; /* Remove default bullet points */
+}
+
+.horizontal-list li {
+  display: inline-block; /* Keep each item inline */
+  margin-right: 15px; /* Add some space between the items */
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  min-width: 150px; /* Minimum width for the list items */
+  text-align: center;
+}
+
+.horizontal-list li:last-child {
+  margin-right: 0; /* Remove margin from the last item */
+}
