@@ -15,6 +15,7 @@ const CardItem = ({ item }) => {
     height: "150px",
     margin: "20px",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    textWrap:'wrap'
   };
 
   const specialStyles = {

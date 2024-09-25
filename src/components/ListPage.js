@@ -26,7 +26,9 @@ const ListPage = () => {
     <div>
       <h1>List of Data:</h1>
 
-      <h2>Books:</h2>
+      <h2 className="text-2xl font-semibold text-black-200 border-b-2 border-gray-600 pb-2 mb-4">
+        Books
+      </h2>
       <div className="scroll-container">
         <ul className="horizontal-list">
           {list?.books?.map((book, index) => (
@@ -37,7 +39,9 @@ const ListPage = () => {
         </ul>
       </div>
 
-      <h2>Characters:</h2>
+      <h2 className="text-2xl font-semibold text-black-200 border-b-2 border-gray-600 pb-2 mb-4">
+        Character{" "}
+      </h2>
       <div className="scroll-container">
         <ul className="horizontal-list">
           {list?.characters?.map((character, index) => (
@@ -48,7 +52,9 @@ const ListPage = () => {
         </ul>
       </div>
 
-      <h2>Houses:</h2>
+      <h2 className="text-2xl font-semibold text-black-200 border-b-2 border-gray-600 pb-2 mb-4">
+        Houses{" "}
+      </h2>
       <div className="scroll-container">
         <ul className="horizontal-list">
           {list?.houses?.map((house, index) => (
