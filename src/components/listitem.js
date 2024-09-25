@@ -47,7 +47,7 @@ const CardItem = ({ item }) => {
   let cardStyles = { ...baseCardStyles };
   if (item.authors) {
     cardStyles = { ...cardStyles, ...specialStyles.authors };
-  } else if (item.coatOfArms) {
+  } else if (item.region) {
     cardStyles = { ...cardStyles, ...specialStyles.coatOfArms };
   } else if (item.gender) {
     cardStyles = { ...cardStyles, ...specialStyles.gender };

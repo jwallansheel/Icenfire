@@ -49,62 +49,62 @@ const DetailsPage = () => {
       <h1 className="text-3xl font-bold mb-5 text-center">
         {details?.name || details?.aliases?.[0] || "N/A"}
       </h1>
+      {details.gender && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-gray-800 p-4 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold">Character Details</h2>
+            <p>Name: {details.name || "N/A"}</p>
+            <p>Gender: {details.gender || "N/A"}</p>
+            <p>Culture: {details.culture || "N/A"}</p>
+            <p>Born: {details.born || "N/A"}</p>
+            <p>Died: {details.died || "N/A"}</p>
+            <p>Aliases: {details.aliases?.join(", ") || "N/A"}</p>
+            <p>Titles: {details.titles?.join(", ") || "N/A"}</p>
+            <p>
+              Allegiances:{" "}
+              {details?.allegiances?.length > 0
+                ? details.allegiances.join(", ")
+                : "None"}
+            </p>
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold">Character Details</h2>
-          <p>Name: {details.name || "N/A"}</p>
-          <p>Gender: {details.gender || "N/A"}</p>
-          <p>Culture: {details.culture || "N/A"}</p>
-          <p>Born: {details.born || "N/A"}</p>
-          <p>Died: {details.died || "N/A"}</p>
-          <p>Aliases: {details.aliases?.join(", ") || "N/A"}</p>
-          <p>Titles: {details.titles?.join(", ") || "N/A"}</p>
-          <p>
-            Allegiances:{" "}
-            {details?.allegiances?.length > 0
-              ? details.allegiances.join(", ")
-              : "None"}
-          </p>
+          <div className="bg-gray-800 p-4 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold">Books</h2>
+            {details.books && details.books.length > 0 ? (
+              details.books.map((bookUrl, index) => (
+                <CardItem key={index} item={bookUrl} />
+              ))
+            ) : (
+              <p>None</p>
+            )}
+          </div>
+
+          <div className="bg-gray-800 p-4 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold">POV Books</h2>
+            {details.povBooks && details.povBooks.length > 0 ? (
+              details.povBooks.map((povBookUrl, index) => (
+                <CardItem key={index} item={povBookUrl} />
+              ))
+            ) : (
+              <p>None</p>
+            )}
+          </div>
+
+          <div className="bg-gray-800 p-4 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold">TV Series</h2>
+            <p>
+              {details.tvSeries?.length > 0
+                ? details.tvSeries.join(", ")
+                : "None"}
+            </p>
+          </div>
+
+          <div className="bg-gray-800 p-4 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold">Played By</h2>
+            <p>{details.playedBy?.join(", ") || "N/A"}</p>
+          </div>
         </div>
-
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold">Books</h2>
-          {details.books && details.books.length > 0 ? (
-            details.books.map((bookUrl, index) => (
-              <CardItem key={index} item={bookUrl} />
-            ))
-          ) : (
-            <p>None</p>
-          )}
-        </div>
-
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold">POV Books</h2>
-          {details.povBooks && details.povBooks.length > 0 ? (
-            details.povBooks.map((povBookUrl, index) => (
-              <CardItem key={index} item={povBookUrl} />
-            ))
-          ) : (
-            <p>None</p>
-          )}
-        </div>
-
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold">TV Series</h2>
-          <p>
-            {details.tvSeries?.length > 0
-              ? details.tvSeries.join(", ")
-              : "None"}
-          </p>
-        </div>
-
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold">Played By</h2>
-          <p>{details.playedBy?.join(", ") || "N/A"}</p>
-        </div>
-      </div>
-
+      )}
       {details.authors && (
         <div className="bg-gray-800 p-4 rounded-lg shadow-md mt-5">
           <h2 className="text-xl font-semibold">Book Details</h2>
@@ -123,7 +123,9 @@ const DetailsPage = () => {
 
       {details.coatOfArms && (
         <div className="bg-gray-800 p-4 rounded-lg shadow-md mt-5">
-          <h2 className="text-xl font-semibold">House Details</h2>
+          <h2 className="text-xl font-semibold">
+            {details.name || "House Details"}
+          </h2>
           <p>Coat of Arms: {details.coatOfArms || "N/A"}</p>
           <p>Region: {details.region || "N/A"}</p>
           <p>Words: {details.words || "N/A"}</p>
@@ -143,6 +145,30 @@ const DetailsPage = () => {
               "None"
             )}
           </p>
+
+          {/* Display Seats */}
+          <h3 className="mt-4 text-lg font-semibold">Seats:</h3>
+          <div className="flex flex-wrap">
+            {details.seats && details.seats.length > 0 ? (
+              details.seats.map((seat, index) => (
+                <CardItem key={index} item={seat} />
+              ))
+            ) : (
+              <p className="text-gray-400">None</p>
+            )}
+          </div>
+
+          {/* Display Sworn Members */}
+          <h3 className="mt-4 text-lg font-semibold">Sworn Members:</h3>
+          <div className="flex flex-wrap">
+            {details.swornMembers && details.swornMembers.length > 0 ? (
+              details.swornMembers.map((member, index) => (
+                <CardItem key={index} item={member} />
+              ))
+            ) : (
+              <p className="text-gray-400">None</p>
+            )}
+          </div>
         </div>
       )}
 
